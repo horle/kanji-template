@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{ltjsarticle}
+\usepackage{fontspec}
+\usepackage{luatexja-fontspec}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{lmodern}
+\usepackage[top=10mm,bottom=10.5mm,left=9mm, right=9mm]{geometry}
+
+\pagestyle{empty}
+
+\makeatletter
+\newcommand{\tleft}{\mathrel\triangleleft}
+\newcommand{\tright}{\mathrel\triangleright}
+\DeclareRobustCommand{\btleft}{\mathrel{\mathpalette\btlr@\blacktriangleleft}}
+\DeclareRobustCommand{\btright}{\mathrel{\mathpalette\btlr@\blacktriangleright}}
+
+\newcommand{\btlr@}[2]{%
+	\begingroup
+	\sbox\z@{$\m@th#1\triangleright$}%
+	\sbox\tw@{\resizebox{1.1\wd\z@}{1.1\ht\z@}{\raisebox{\depth}{$\m@th#1\mkern-1mu#2$}}}%
+	\ht\tw@=\ht\z@ \dp\tw@=\dp\z@ \wd\tw@=\wd\z@
+	\copy\tw@
+	\endgroup
+}
+
+\setmainjfont{UD Digi Kyokasho NK-R}
+
+\begin{document}
+
+\noindent
+\begin{tikzpicture}
+\draw[step=12mm,gray,thin,dashed,dash pattern=on .4mm off .3mm, yshift=6mm,xshift=6mm] (0.6,-0.6) grid (18.6, 24.6);
+\draw[step=12mm,black] (1.2, 0) grid (19.2, 25.2);
+\draw[white] (0,0)--(1.2,0);
+
+\draw[step=12mm,black] (1.2, 25.2) rectangle (19.2, 27.6);
+\draw[black] (3.6, 25.2) -- (3.6, 27.6);
+\draw[gray,thin,dashed,dash pattern=on .4mm off .3mm] (1.2, 26.4) -- (3.6, 26.4);
+\draw[gray,thin,dashed,dash pattern=on .4mm off .3mm] (2.4, 27.6) -- (2.4, 25.2);
+\draw[black] (10.8, 25.2) -- (10.8, 27.6);
+
+\node[anchor=south east] at (6, 26.6) {\large 音読み $\btright$};
+\node[anchor=south east] at (6, 25.5) {\large 訓読み $\tright$};
+\end{tikzpicture}
+
+\end{document}
